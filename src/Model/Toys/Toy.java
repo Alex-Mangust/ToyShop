@@ -8,12 +8,17 @@ public abstract class Toy implements Comparable<Toy> {
     static {
         count = 0;
     }
-    
+
     public Toy(String name) {
         this.id = count;
         count++;
         this.name = name; 
     }
+
+    public static void resetCount() {
+        count = 0;
+    }
+
 
     public int getId() {
         return id;
@@ -30,8 +35,15 @@ public abstract class Toy implements Comparable<Toy> {
 
     @Override
     public int compareTo(Toy toy) {
-        if (this.id < toy.id) return -1;
-        else if (this.id > toy.id) return 1;
-        else return 0;
+        if (toy == null) {
+            return 1;
+        }
+        if (this.id < toy.id) {
+            return -1;
+        } else if (this.id > toy.id) {
+            return 1;
+        } else {
+            return 0;
+        }
     }
 }
