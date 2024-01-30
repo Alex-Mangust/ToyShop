@@ -1,17 +1,14 @@
 package Model.FabricToys;
 
-import Controller.iToy;
+import Model.Toys.Toy;
 
 public abstract class ToyFabric {
-    protected static int numberName;
 
     public void openReward() {
-        iToy gameItem = createToy();
+        Toy gameItem = createToy();
+        System.out.println(gameItem);
     }
 
-    static {
-        numberName = 0;
-    }
-
-    public abstract iToy createToy();
+    public abstract Toy createToy();
+    public abstract String getNameCopies();
 }

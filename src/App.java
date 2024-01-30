@@ -10,8 +10,28 @@
 
 // Вызвать Get 10 раз и записать результат в файл
 
+import Model.Shop;
+import Model.Toys.Toy;
+
 public class App {
     public static void main(String[] args) throws Exception {
-        System.out.println("Hello, World!");
+
+        Shop toyShop = new Shop();
+        System.out.println(toyShop.getToyFabrics());;
+
+        toyShop.createToy(0, 2);
+        toyShop.createToy(4, 2);
+        // toyShop.createToy(3,3);
+        // toyShop.createToy(2, 2);
+        // toyShop.createToy(1, 1);
+        // toyShop.createToy(0, 1);
+
+        for (Toy toy : toyShop.getQueueToys()) {
+            System.out.println(toy);
+        }
+
+        System.out.println(toyShop.getCountCopiesToys("Black"));;
+    
     }
 }
+
