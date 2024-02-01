@@ -4,16 +4,16 @@ import Model.FabricToys.ToyFabric;
 import Model.Toys.TaddyBear;
 import Model.Toys.Toy;
 
-public class TaddyBearFabric extends ToyFabric {
+public class VinniPuhFabric extends ToyFabric {
 
     @Override
     public Toy createToy() {
-        return new TaddyBear("Taddy Bear");
+        return new TaddyBear("Vinni Puh");
     }
 
     @Override
     public String getNameCopies() {
-        return "Taddy Bear";
+        return "Vinni Puh";
     }
     
 }

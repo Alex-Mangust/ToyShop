@@ -15,4 +15,5 @@ public interface iShop {
     String getCountCopiesToys(String toyName);
     String assortiment();
     String assortiment(String copiesName);
+    String get(String nameToyId);
 }

@@ -10,8 +10,17 @@ public interface iView {
     void errorChoiceNewToy();
     int chanceToy();
     void toyAddedSuccessfully();
+    void errorPathToDirectoryFabric();
     void impossibleChance();
     int allOrNotAllAssortiment();
     String nameToys();
     void notFound();
+    int countGame();
+    int choiceGetToy(String msg);
+    void congratulations();
+    void unluckyWin();
+    void outOfAssortiment();
+    String calculateChance(String msg);
+    void assortimentIsEmpty();
+    void commandNotFound();
 }

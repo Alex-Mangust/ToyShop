@@ -15,7 +15,7 @@ public class View implements iView {
     @Override
     public String prompt(String msg) {
         Scanner in = new Scanner(System.in);
-        System.out.print(msg + " ");
+        System.out.print(msg);
         if (exit) in.close();
         return in.nextLine();
     }
@@ -54,7 +54,7 @@ public class View implements iView {
     @Override
     public int chanceToy() {
         try {
-            return Integer.parseInt(prompt("Задайте вероятность выпадения игрушки(от 1% до 100%):"));
+            return Integer.parseInt(prompt("Задайте вероятность выпадения игрушки(от 1% до 100%): "));
         } catch (Exception e) {
             return 0;
         }
@@ -63,6 +63,11 @@ public class View implements iView {
     @Override
     public void toyAddedSuccessfully() {
         System.out.println("Игрушка успешно добавлена в ассортимент!");
+    }
+
+    @Override
+    public void errorPathToDirectoryFabric() {
+        System.out.println("У вас нет моделий для добавления игрушек! Пожалуйста убедитесь, что путь к моделям игрушек указан верно!");
     }
 
     @Override
@@ -81,11 +86,63 @@ public class View implements iView {
 
     @Override
     public String nameToys() {
-        return prompt("Введите наименование игрушки: ");
+        return prompt("Введите наименование игрушки (Чтобы распечатать весь ассортимент введите all*): ");
     }
 
     @Override
     public void notFound() {
         System.out.println("Поиск не дал результатов!");
+    }
+
+    @Override
+    public int countGame() {
+        try {
+            return Integer.parseInt(prompt("Сколько раз вы хотите сыграть: "));
+        } catch (Exception e) {
+            return 1;
+        }
+    }
+    
+    @Override
+    public int choiceGetToy(String msg) {
+        System.out.println("Выберите какую игрушку вы хотите получить: ");
+        try {
+            return Integer.parseInt(prompt(msg));
+            
+        } catch (Exception e) {
+            return -1;
+        }
+    }
+
+
+    @Override
+    public void congratulations() {
+        System.out.println("Поздравляю, вы выиграли!");
+    }
+
+    @Override
+    public void unluckyWin() {
+        System.out.println("К сожалению выбить игрушку не удалось.");
+    }
+
+    @Override
+    public void outOfAssortiment() {
+        System.out.println("К сожалению выбранной вами игрушки нет в ассортименте.");
+    }
+
+    @Override
+    public String calculateChance(String msg) {
+        System.out.println("Для какой игрушки вы хотите узнать вероятность выпадения?\nВыберите один вариант:");
+        return prompt(msg);
+    }
+
+    @Override
+    public void assortimentIsEmpty() {
+        System.out.println("Ассортимент пуст!");
+    }
+
+    @Override
+    public void commandNotFound() {
+        System.out.println("Данной команды нет в списке команд!\nВведите \"menu\", чтобы посмотреть список команд для работы с программой!");
     }
 }

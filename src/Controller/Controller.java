@@ -4,6 +4,7 @@ import java.util.concurrent.TimeUnit;
 
 import Controller.Interfaces.iShop;
 import Controller.Interfaces.iView;
+import Model.Toys.Toy;
 
 public class Controller {
     private iShop toyShop;
@@ -72,8 +73,11 @@ public class Controller {
                                         int inputChance = view.chanceToy();
                                         if (inputChance > 0 && inputChance <= 100) {
                                             inputChancePossible = true;
-                                            toyShop.createToy(choiceFabrics, inputChance);
-                                            view.toyAddedSuccessfully();
+                                            boolean create = toyShop.createToy(choiceFabrics, inputChance);
+                                            if (create)
+                                                view.toyAddedSuccessfully();
+                                            else
+                                                view.errorPathToDirectoryFabric();
                                             timeSleep(1);
                                         } else {
                                             view.impossibleChance();
@@ -88,29 +92,82 @@ public class Controller {
                         }
                         break;
                     case ASSORTIMENT:
-                        if (view.allOrNotAllAssortiment() == 1) {
-                            if (toyShop.assortiment().isEmpty())
-                                view.notFound();
-                            else
-                                System.out.println(toyShop.assortiment());
-                        } else {
-                            if (toyShop.assortiment(toyShop.getCountCopiesToys(view.nameToys())).isEmpty())
-                                view.notFound();
-                            else
-                                System.out.println(toyShop.assortiment(toyShop.getCountCopiesToys(view.nameToys())));
-                        }
+                        if (testToys()) {
+                            String nameToy = view.nameToys();
+                            if (nameToy.toLowerCase().equals("all*")) {
+                                if (toyShop.assortiment().isEmpty())
+                                    view.notFound();
+                                else
+                                    System.out.println(toyShop.assortiment());
+                            } else {
+                                String copiesToyAssortiment = toyShop.assortiment(nameToy);
+                                if (copiesToyAssortiment.isEmpty())
+                                    view.notFound();
+                                else
+                                    System.out.println(copiesToyAssortiment);
+                            }
+                        } else
+                            view.assortimentIsEmpty();
                         break;
                     case GET:
-
+                        if (testToys()) {
+                            int countGame = view.countGame();
+                            for (int i = 0; i < countGame; i++) {
+                                String nameToy = toyShop.toyFabrics();
+                                int yourChoice = view.choiceGetToy(nameToy);
+                                if (yourChoice > 0 && yourChoice <= toyShop.getToyFabrics().size()) {
+                                    // int to = toyShop.getToyFabrics().size();
+                                    String getToy = toyShop
+                                            .get(toyShop.getToyFabrics().get(yourChoice - 1).getNameCopies());
+                                    if (getToy.isEmpty())
+                                        view.unluckyWin();
+                                    else if (getToy.equals("-1"))
+                                        view.outOfAssortiment();
+                                    else {
+                                        view.congratulations();
+                                        System.out.println(getToy);
+                                    }
+                                    System.out.println();
+                                }
+                            }
+                        } else
+                            view.assortimentIsEmpty();
+                        timeSleep(1);
                         break;
                     case CHANCE:
-
+                        if (testToys()) {
+                            String fabrics = toyShop.toyFabrics();
+                            String choiceToy = view.calculateChance(fabrics);
+                            String nameToy = new String();
+                            String[] fabricsArray = fabrics.split(";");
+                            for (int i = 0; i < fabricsArray.length; i++) {
+                                String[] fabricElement = fabricsArray[i].split(" - ");
+                                for (int j = 0; j < fabricElement[0].length(); j++) {
+                                    if (convertToNumber((Character.toString(fabricElement[0].charAt(j)))))
+                                        if (choiceToy.equals(Character.toString(fabricElement[0].charAt(j))))
+                                            nameToy = fabricElement[1];
+                                }
+                            }
+                            if (!nameToy.isEmpty())
+                                System.out.println(toyShop.getCountCopiesToys(nameToy));
+                        } else
+                            view.assortimentIsEmpty();
+                        break;
+                    case ALLTOY:
+                        int numberRecord = 1;
+                        for (Toy toy : toyShop.getQueueToys()) {
+                            System.out.print(toy + "\t\t");
+                            if (numberRecord % 3 == 0)
+                                System.out.println();
+                            numberRecord++;
+                        }
+                        System.out.println();
                         break;
                     default:
-
+                        view.commandNotFound();
                 }
             } catch (Exception e) {
-                // TODO: handle exception
+                view.commandNotFound();
             }
         }
     }

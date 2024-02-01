@@ -5,6 +5,7 @@ import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.PriorityQueue;
+import java.util.Random;
 
 import Controller.Interfaces.iShop;
 import Model.FabricToys.ToyFabric;
@@ -13,6 +14,12 @@ import Model.Toys.Toy;
 public class Shop implements iShop {
     private List<ToyFabric> toyFabrics = new ArrayList<>();
     private PriorityQueue<Toy> queueToys = new PriorityQueue<>();
+
+    private static Random rand;
+
+    static {
+        rand = new Random();
+    }
 
     public Shop() throws ClassNotFoundException {
         List<String> listFabricFile = ListFabricFile();
@@ -56,22 +63,33 @@ public class Shop implements iShop {
                 copiesNames += "\n";
             number++;
         }
-        return copiesNames;
+        return copiesNames + "\n";
     }
 
     @Override
     public boolean createToy(int criteria, int probability) {
         if (!toyFabrics.isEmpty()) {
             PriorityQueue<Toy> newQueueToys = new PriorityQueue<>();
-            if (probability > 100 - queueToys.size()) {
-                for (int i = 0; i < probability; i++) {
-                    Toy.resetCount();
-                    queueToys.poll();
-                }
-            }
+            int countCopies = 0;
             if (!queueToys.isEmpty()) {
+                if (countCopies < probability) {
+                    deleteToys(toyFabrics.get(criteria).getNameCopies());
+                    Toy.resetCount();
+                }
                 for (Toy toy : queueToys) {
                     newQueueToys.add(toy);
+                    String countCopiesToys = getCountCopiesToys(toyFabrics.get(criteria).getNameCopies());
+                    if (!countCopiesToys.isEmpty()) {
+                        String[] countCopiesToysArray = countCopiesToys.split(" = ");
+                        try {
+                            countCopies = Integer.parseInt(countCopiesToysArray[1]);
+                        } catch (Exception e) {
+                            System.out.println(e.getMessage());
+                        }
+                        if (probability > countCopies) {
+                            probability -= countCopies;
+                        }
+                    }
                 }
             }
             while (probability > 0) {
@@ -85,8 +103,6 @@ public class Shop implements iShop {
             return true;
         } else
             return false;
-        // System.out.println("У вас нет моделий для добавления игрушек! Пожалуйста
-        // убедитесь, что путь к моделям игрушек указан верно!");
     }
 
     @Override
@@ -102,50 +118,13 @@ public class Shop implements iShop {
     @Override
     public String getCountCopiesToys(String toyName) {
         if (!toyName.isEmpty()) {
-            boolean find = false;
             int countToys = 0;
             String bestMatchName = new String();
             for (Toy toy : queueToys) {
                 if (toyName.toLowerCase().equals(toy.getName().toLowerCase())) {
                     bestMatchName = toy.getName();
                     countToys++;
-                    find = true;
                 }
-            }
-            if (!find) {
-                char[] toyNameArray = toyName.toLowerCase().toCharArray();
-                int countMatch;
-                int bestMatch = 0;
-                for (Toy toy : queueToys) {
-                    if (!toy.getName().equals(bestMatchName)) {
-                        countMatch = 0;
-                        char[] copiesNameArray = toy.getName().toLowerCase().toCharArray();
-                        int index = 0;
-                        for (int i = 0; i < copiesNameArray.length; i++) {
-                            if (index < toyNameArray.length) {
-                                if (toyNameArray[index] == copiesNameArray[i]) {
-                                    countMatch++;
-                                    index++;
-                                } else {
-                                    index = 0;
-                                    if (bestMatch < countMatch) {
-                                        bestMatch = countMatch;
-                                    }
-                                }
-                            } else {
-                                break;
-                            }
-                        }
-
-                        if (bestMatch < countMatch) {
-                            bestMatch = countMatch;
-                            bestMatchName = toy.getName();
-                        }
-                    }
-                }
-                if (countToys == 0)
-                    return getCountCopiesToys(bestMatchName);
-
             }
             return String.format("%s = %d", bestMatchName, countToys);
         }
@@ -180,8 +159,22 @@ public class Shop implements iShop {
         List<String> assortiment = new ArrayList<>();
         for (Toy toy : getQueueToys()) {
             if (!assortiment.contains(toy.getName())) {
-                if (toy.getName().toLowerCase().equals(copiesName.toLowerCase()))
-                    assortiment.add(toy.getName());
+                char[] toyNameArray = copiesName.toLowerCase().toCharArray();
+                int index = 0;
+                String toyName = toy.getName().toLowerCase();
+                for (int i = 0; i <= toyName.length(); i++) {
+                    if (index < toyNameArray.length) {
+                        // String a = Character.toString(toyName.charAt(i));
+                        if ((i != toyName.length() && toyNameArray[index] == toyName.charAt(i))) {
+                            index++;
+                        } else if (index != 0)
+                            break;
+                    } else {
+                        assortiment.add(toy.getName());
+                        break;
+                    }
+                }
+
             }
         }
         String assortimentStr = new String();
@@ -196,13 +189,34 @@ public class Shop implements iShop {
                 }
             }
         }
-        if (assortiment.isEmpty()) {
-            if (!copiesName.isEmpty()) {
-                String[] copiesNameArray = copiesName.split(" = ");
-                return assortiment(copiesNameArray[0]);
-            }
-        }
         return assortimentStr;
+    }
+
+    @Override
+    public String get(String nameToy) {
+        int chance = rand.nextInt(0, 100);
+        String countryCopies = getCountCopiesToys(nameToy);
+        if (!countryCopies.isEmpty()) {
+            String[] countryToys = countryCopies.split(" = ");
+            try {
+                int countElement = Integer.parseInt(countryToys[1]);
+                if (countElement >= chance) {
+                    PriorityQueue<Toy> newQueueToys = queueToys;
+                    for (Toy toy : queueToys) {
+                        if (toy.getName().equals(nameToy)) {
+                            newQueueToys.remove(toy);
+                            setQueueToys(newQueueToys);
+                            return toy.toString();
+                        }
+                    }
+                    return new String();
+                } else
+                    return new String();
+            } catch (Exception e) {
+                return e.getMessage();
+            }
+        } else
+            return "-1";
     }
 
     private String resetId(Toy toy, int id) {
@@ -241,6 +255,16 @@ public class Shop implements iShop {
         } catch (Exception e) {
             return new ArrayList<>();
         }
+    }
+
+    private void deleteToys(String toyName) {
+        PriorityQueue<Toy> newQueueToys = new PriorityQueue<>(queueToys);
+        for (Toy toy : queueToys) {
+            if (toyName.equals(toy.getName())) {
+                newQueueToys.remove(toy);
+            }
+        }
+        setQueueToys(newQueueToys);
     }
 
     private boolean convertToNumber(Character number) {
