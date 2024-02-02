@@ -1,0 +1,6 @@
+id: 0  Наименование: Black Spider-Man - 5
+id: 1  Наименование: Cheburashka - 2%
+id: 2  Наименование: Kinder - 9
+id: 3  Наименование: Taddy Bear - 4%
+id: 4  Наименование: Vinni Puh - 5%
+id: 5  Наименование: Spider-Man - 22

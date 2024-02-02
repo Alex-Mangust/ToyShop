@@ -21,6 +21,7 @@ public interface iView {
     void unluckyWin();
     void outOfAssortiment();
     String calculateChance(String msg);
+    String resultChancee(String msg);
     void assortimentIsEmpty();
     void commandNotFound();
 }

@@ -116,9 +116,7 @@ public class Controller {
                                 String nameToy = toyShop.toyFabrics();
                                 int yourChoice = view.choiceGetToy(nameToy);
                                 if (yourChoice > 0 && yourChoice <= toyShop.getToyFabrics().size()) {
-                                    // int to = toyShop.getToyFabrics().size();
-                                    String getToy = toyShop
-                                            .get(toyShop.getToyFabrics().get(yourChoice - 1).getNameCopies());
+                                    String getToy = toyShop.get(toyShop.getToyFabrics().get(yourChoice - 1).getNameCopies());
                                     if (getToy.isEmpty())
                                         view.unluckyWin();
                                     else if (getToy.equals("-1"))
@@ -126,6 +124,7 @@ public class Controller {
                                     else {
                                         view.congratulations();
                                         System.out.println(getToy);
+                                        timeSleep(1);
                                     }
                                     System.out.println();
                                 }
@@ -148,20 +147,11 @@ public class Controller {
                                             nameToy = fabricElement[1];
                                 }
                             }
-                            if (!nameToy.isEmpty())
-                                System.out.println(toyShop.getCountCopiesToys(nameToy));
+                            if (!nameToy.isEmpty()) {
+                                System.out.println(view.resultChancee(toyShop.getCountCopiesToys(nameToy)));
+                            }
                         } else
                             view.assortimentIsEmpty();
-                        break;
-                    case ALLTOY:
-                        int numberRecord = 1;
-                        for (Toy toy : toyShop.getQueueToys()) {
-                            System.out.print(toy + "\t\t");
-                            if (numberRecord % 3 == 0)
-                                System.out.println();
-                            numberRecord++;
-                        }
-                        System.out.println();
                         break;
                     default:
                         view.commandNotFound();

@@ -7,6 +7,5 @@ public enum Command {
     ASSORTIMENT,
     GET,
     CHANCE,
-    ALLTOY,
     EXIT,
 }

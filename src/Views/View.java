@@ -117,7 +117,7 @@ public class View implements iView {
 
     @Override
     public void congratulations() {
-        System.out.println("Поздравляю, вы выиграли!");
+        System.out.println("\n\nПоздравляю, вы выиграли!\n");
     }
 
     @Override
@@ -137,6 +137,12 @@ public class View implements iView {
     }
 
     @Override
+    public String resultChancee(String msg) {
+        String[] resultChance = msg.split(" = ");
+        return String.format("Вероястность выпада игрушки %s - %s%%", resultChance[0], resultChance[1]);
+    }
+
+    @Override
     public void assortimentIsEmpty() {
         System.out.println("Ассортимент пуст!");
     }
@@ -145,4 +151,6 @@ public class View implements iView {
     public void commandNotFound() {
         System.out.println("Данной команды нет в списке команд!\nВведите \"menu\", чтобы посмотреть список команд для работы с программой!");
     }
+
+    
 }

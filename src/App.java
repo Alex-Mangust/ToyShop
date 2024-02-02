@@ -13,6 +13,7 @@
 import Controller.Controller;
 import Controller.Interfaces.iShop;
 import Controller.Interfaces.iView;
+import Model.Decorator;
 import Model.Shop;
 import Views.View;
 
@@ -20,9 +21,10 @@ public class App {
     public static void main(String[] args) throws Exception {
 
         iShop toyShop = new Shop();
+        iShop decorator = new Decorator(toyShop, "log.txt");
         iView view = new View();
 
-        Controller controller = new Controller(toyShop, view);
+        Controller controller = new Controller(decorator, view);
         controller.run();
     }
 }
