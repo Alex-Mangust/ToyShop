@@ -21,7 +21,7 @@ public class App {
     public static void main(String[] args) throws Exception {
 
         iShop toyShop = new Shop();
-        iShop decorator = new Decorator(toyShop, "log.txt");
+        iShop decorator = new Decorator(toyShop, "Assortiment.txt");
         iView view = new View();
 
         Controller controller = new Controller(decorator, view);

@@ -1,5 +1,44 @@
 Дата: 02:02:24
 Сегодняшний выигрышь:
 
-№: 0  Наименование: Black Spider-Man
 №: 1  Наименование: Black Spider-Man
+№: 2  Наименование: Black Spider-Man
+
+
+Дата: 04:02:24
+Сегодняшний выигрышь:
+
+№: 1  Наименование: Black Spider-Man
+№: 2  Наименование: Cheburashka
+№: 3  Наименование: Kinder
+№: 4  Наименование: Spider-Man
+№: 5  Наименование: Taddy Bear
+№: 6  Наименование: Vinni Puh
+№: 7  Наименование: Vinni Puh
+№: 8  Наименование: Taddy Bear
+№: 9  Наименование: Kinder
+№: 10  Наименование: Kinder
+№: 11  Наименование: Kinder
+№: 12  Наименование: Spider-Man
+№: 13  Наименование: Spider-Man
+№: 14  Наименование: Black Spider-Man
+№: 15  Наименование: Taddy Bear
+№: 16  Наименование: Vinni Puh
+№: 17  Наименование: Vinni Puh
+№: 18  Наименование: Vinni Puh
+№: 19  Наименование: Black Spider-Man
+№: 20  Наименование: Cheburashka
+
+
+Дата: 05:02:24
+Сегодняшний выигрышь:
+
+№: 1  Наименование: Kinder
+№: 2  Наименование: Kinder
+№: 3  Наименование: Black Spider-Man
+№: 4  Наименование: Taddy Bear
+№: 5  Наименование: Kinder
+№: 6  Наименование: Cheburashka
+№: 7  Наименование: Vinni Puh
+№: 8  Наименование: Black Spider-Man
+№: 9  Наименование: Kinder

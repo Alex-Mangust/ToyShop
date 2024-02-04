@@ -4,7 +4,6 @@ import java.util.concurrent.TimeUnit;
 
 import Controller.Interfaces.iShop;
 import Controller.Interfaces.iView;
-import Model.Toys.Toy;
 
 public class Controller {
     private iShop toyShop;
@@ -148,7 +147,7 @@ public class Controller {
                                 }
                             }
                             if (!nameToy.isEmpty()) {
-                                System.out.println(view.resultChancee(toyShop.getCountCopiesToys(nameToy)));
+                                System.out.println(view.resultChancee(toyShop.getProbabilityCopiesToys(nameToy)));
                             }
                         } else
                             view.assortimentIsEmpty();

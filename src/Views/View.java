@@ -139,7 +139,7 @@ public class View implements iView {
     @Override
     public String resultChancee(String msg) {
         String[] resultChance = msg.split(" = ");
-        return String.format("Вероястность выпада игрушки %s - %s%%", resultChance[0], resultChance[1]);
+        return String.format("Вероястность выпадения игрушки %s - %s%%", resultChance[0], resultChance[1]);
     }
 
     @Override
