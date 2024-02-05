@@ -5,7 +5,7 @@ public class SpiderMan extends Toy {
 
     /**
      * Конструктор класса
-     * @param name - имя игрушки
+     * @param name - название игрушки
      */
     public SpiderMan(String name) {
         super(name);

@@ -3,7 +3,7 @@ package Model.Toys;
 /** Абстрактный класс, описывающий поведение игрушки. Имеет интерфейс Comparable */
 public abstract class Toy implements Comparable<Toy> {
     private int id; // id игрушки
-    private String name; // имя игрушки
+    private String name; // название игрушки
     private static int count; // Количество созданных экземпляров
 
     static {
@@ -12,7 +12,7 @@ public abstract class Toy implements Comparable<Toy> {
 
     /**
      * Конструктор класса
-     * @param name - имя игрушки
+     * @param name - название игрушки
      */
     public Toy(String name) {
         this.id = count;

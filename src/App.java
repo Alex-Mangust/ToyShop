@@ -20,11 +20,11 @@ import Views.View;
 public class App {
     public static void main(String[] args) throws Exception {
 
-        iShop toyShop = new Shop();
-        iShop decorator = new Decorator(toyShop, "Assortiment.txt");
-        iView view = new View();
+        iShop toyShop = new Shop();  // Создаю экземпляр класса Shop для работы с розыгрышом в магазине игрушек
+        iShop decorator = new Decorator(toyShop, "Assortiment.txt"); // Создаю экземпляр класса decorator, который иметирует работу класса Shop, добавляя/переделывая функционал (добавляет возможность работы с файлами)
+        iView view = new View(); // Создаю экземпляр класса View для работы с пользовательским интерфейсом
 
-        Controller controller = new Controller(decorator, view);
-        controller.run();
+        Controller controller = new Controller(decorator, view); // Создаю экземпляр класса Controllers для работы с моделью и пользовательским интерфейсом, передаю, в качестве аргументов, созданные модель и пользовательский интерфейс
+        controller.run(); // Вызываю метод для запуска программы
     }
 }

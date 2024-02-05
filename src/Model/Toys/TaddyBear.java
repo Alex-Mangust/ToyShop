@@ -5,7 +5,7 @@ public class TaddyBear extends Toy {
 
     /**
      * Конструктор класса
-     * @param name - имя игрушки
+     * @param name - название игрушки
      */
     public TaddyBear(String name) {
         super(name);

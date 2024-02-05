@@ -215,7 +215,7 @@ public class Decorator implements iShop {
             if (!assortiment.contains(name)) { // Проверяется, что в списке нет текущего названия игрушки
                 char[] toyNameArray = copiesName.toLowerCase().toCharArray(); // Из введенного пользователем запроса создается массив символов
                 int index = 0; // Переменная для хранения индекса элементов массива символов
-                String toyName = name.toLowerCase(); // Строка, хранящая имя игрушки
+                String toyName = name.toLowerCase(); // Строка, хранящая название игрушки
                 for (int i = 0; i <= toyName.length(); i++) { // Цикл проходит по все строке с именем
                     if (index < toyNameArray.length) { // Проверяется условие, что значение переменной index меньше, чем длина массива символов
                         if ((i != toyName.length() && toyNameArray[index] == toyName.charAt(i))) { // Проверяется условие, что i не равняетяс длине строки с именем, а также то, что элемент массива под индексом со значением переменной index соответсвует символу строки, который находится по индексом со значением i

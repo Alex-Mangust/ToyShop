@@ -194,7 +194,7 @@ public class Shop implements iShop {
             if (!assortiment.contains(toy.getName())) { // Проверяется, что в ассортименте уже нет названия рассматриваемой игрушки
                 char[] toyNameArray = copiesName.toLowerCase().toCharArray(); // Из введенного пользователем запроса создается массив символов
                 int index = 0; // Переменная для хранения индекса элементов массива символов
-                String toyName = toy.getName().toLowerCase(); // Строка, хранящая имя игрушки
+                String toyName = toy.getName().toLowerCase(); // Строка, хранящая название игрушки
                 for (int i = 0; i <= toyName.length(); i++) { // Цикл проходит по все строке с именем
                     if (index < toyNameArray.length) { // Проверяется условие, что значение переменной index меньше, чем длина массива символов
                         if ((i != toyName.length() && toyNameArray[index] == toyName.charAt(i))) { // Проверяется условие, что i не равняетяс длине строки с именем, а также то, что элемент массива под индексом со значением переменной index соответсвует символу строки, который находится по индексом со значением i
@@ -238,7 +238,7 @@ public class Shop implements iShop {
                 if (probabiliElement >= chance) { // Проверяется, что вероятность выпадения больше или равна переменной chance
                     PriorityQueue<Toy> newQueueToys = new PriorityQueue<>(queueToys); // Создается новая коллекция с элементами из коллекции queueToys
                     for (Toy toy : queueToys) {  // Цикл проходит по всей коллекции с игрушками
-                        if (toy.getName().equals(nameToy)) { // Проверяется, что имя рассматриваемой игрушки соответствует имени игрушки, которую хочет выбить пользователь.
+                        if (toy.getName().equals(nameToy)) { // Проверяется, что название рассматриваемой игрушки соответствует названию игрушки, которую хочет выбить пользователь.
                             newQueueToys.remove(toy); // Игрушка удалается из коллекции
                             setQueueToys(newQueueToys); // Коллекция, хранящая игрушки в магазине заменяется на новую.
                             return toy.toString();
